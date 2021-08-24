@@ -2,6 +2,10 @@ class ManagesController < ApplicationController
 
     before_action :authenticate_user!
 
+    def start
+        
+    end
+
     def index
         @manages = Manage.all
     end
@@ -12,6 +16,7 @@ class ManagesController < ApplicationController
 
     def create
         manage = Manage.new(manage_params)
+        manage.user_id = current_user.id
         if manage.save
             redirect_to :action => "index"
         else

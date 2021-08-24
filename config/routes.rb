@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show]
+  get 'manages/start' => 'manages#start'
   get 'hello/index' => 'hello#index'
   get 'hello/link' => 'hello#link'
   get 'manages' => 'manages#index'
