@@ -1,5 +1,45 @@
-<h1>さぁ、始めよう！</h1>
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<% if user_signed_in? %>
-    <%= link_to "マイページへ", user_path(current_user.id) %>　
-<% end %>
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%= stylesheet_link_tag 'start', :media => "all" %>
+    <div id='user' data-json='{"key":"value"}'></div>
+
+    
+</head>
+<body>
+    <h1>さぁ、始めよう！</h1>
+    <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    <% if user_signed_in? %>
+        <%= link_to "マイページへ", user_path(current_user.id) %>　
+    <% end %>
+
+    <main>
+        <div class="block">
+            <div class="blackBox">
+                <p id = "text"></p>
+                <div class="msk">
+                    <p id="timer">00:00.000</p>
+                </div>
+                <button class="start" id="start">Start</button>
+                <button class="reset" id="reset">Reset</button>
+                <button class="up" id="up">+</button>
+                <button class="down" id="down">-</button>
+            </div>
+
+            
+        </div>
+    </main>
+    <script src="timer.js">
+        <div class = "simple">
+            
+        </div>
+    </script>
+</body>
+</html>

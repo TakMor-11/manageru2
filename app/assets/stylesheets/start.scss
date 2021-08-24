@@ -1,0 +1,92 @@
+body{
+    background-color: #928d8d;
+}
+
+main{
+    height: 500px;
+    width: 800px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.block{
+    width: 500px;
+    height: 500px;
+    border-radius: 300px;
+    background-color: rgb(184, 179, 179);
+    margin: auto;
+    position: relative;
+    
+}
+.blackBox{
+    position: absolute;
+    font-size: 50px;
+    text-align: center;
+    top: 100px;
+    bottom: 100px;
+    left: 100px;
+    right: 100px;
+}
+
+.timer{
+    background-color: rgb(92, 83, 212);
+    border: solid 3px rgb(92, 83, 212);
+    border-radius: 10px;
+    color: #66FF00;
+    font-size: 50px;
+}
+
+#text{
+    color: #66FF00;
+    font-size: 30px;
+}
+button{
+    border-radius: 100px;
+}
+
+.start{
+    color: #66FF00;
+    background-color: black;
+    font-size: 30px;
+    padding: 0 20px;
+    margin-right: 20px
+}
+
+.reset{
+    color: #66FF00;
+    background-color: black;
+    font-size: 30px;
+    padding: 0 10px;
+}
+
+.changeColor{
+    width: 100px;
+    height: 100px;
+    border-radius:100px ;
+    background-color: black;
+    position: relative;
+    bottom: -29px;
+    right: 6px;
+}
+
+.boderColor{
+    width: 50px;
+    height: 50px;
+    border-radius:50px ;
+    border:10px solid #66FF00;
+    margin: auto;
+    background-color: black ;
+}
+
+.active{
+    background-color:#222222;
+    color: brown;
+}
+
+.aquaColor{
+    color: aqua;
+}
+
+.aquaBoder{
+    border: 10px solid aqua;
+}

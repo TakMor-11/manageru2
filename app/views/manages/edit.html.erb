@@ -1,11 +1,15 @@
 <%= form_for @manage do |f| %>
     <%= f.label :'タスク名' %>
-    <%= f.text_field :task, :size => 100 %>
+    <%= f.text_field :task, :size => 50 %>
+    <br>
     <%= f.label :'期限日' %>
     <%= f.date_select :due %>
+    <br>
     <%= f.label :'目標合計時間' %>
     <%= f.text_field :totaltime %>
+    <br>
     <%= f.label :'急ぎ具合' %>
     <%= f.select :hurry, {'普通':1, 'ちょっと急ぎ':2, 'やや急ぎ':3, '急ぎ':4, '大急ぎ':5} %>
+    <br>
     <%= f.submit "編集する" %>
 <% end %>
