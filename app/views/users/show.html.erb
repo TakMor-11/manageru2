@@ -1,0 +1,24 @@
+<h1>users#show</h1>
+<p>名前 : <%= @user.name %></p>
+<p>メールアドレス : <%= @user.email %></p>
+<p>1日の学習時間 : <%= @user.hpd %></p>
+<p>学習時間：休憩時間 => <%= @user.active %> : <%= @user.rest %></p>
+
+<% if current_user.id == @user.id %>
+    <%= link_to "編集する", edit_user_registration_path %>
+<% end %>
+
+<h2>ユーザーの投稿一覧</h2>
+<% @user.manages.each do |t| %>
+    <%= t.user.name %>
+    <%= t.task %>
+    <%= t.due %>
+    <%= t.totaltime %>
+    <%= t.hurry %>
+    <%= t.created_at %>
+    <%= link_to "詳細へ", manage_path(t.id) %>
+    <%= link_to "編集する", edit_manage_path(t.id) %>
+    <%= button_to "削除する", manage_path(t.id), method: :delete %>
+<% end %>
+
+<%= link_to "Task一覧に戻る", manages_path %>

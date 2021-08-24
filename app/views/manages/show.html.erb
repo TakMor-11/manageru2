@@ -7,5 +7,5 @@
     <p><%= @manage.hurry %></p>
     <p><%= @manage.created_at %></p>
 </div>
-
+<%= link_to "編集する", edit_manage_path(@manage.id) %>
 <%= link_to "Task一覧に戻る", manages_path %>
