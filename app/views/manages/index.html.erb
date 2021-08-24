@@ -1,0 +1,16 @@
+<h1>Manageru</h1>
+<h3>Task一覧</h3>
+<%= link_to "新規taskページへ", manages_new_path %>
+<div class="manages-container">
+    <% @manages.each do |t| %>
+        <div class="manage">
+            <%= t.task %>
+            <%= t.due %>
+            <%= t.totaltime %>
+            <%= t.hurry %>
+            <%= t.created_at %>
+            <%= link_to "詳細へ", manage_path(t.id) %>
+        </div>
+    <% end %>
+</div>
+

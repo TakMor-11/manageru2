@@ -1,0 +1,11 @@
+<h1>Manageru</h1>
+<h3>Task詳細</h3>
+<div class="manage">
+    <p><%= @manage.task %></p>
+    <p><%= @manage.due %></p>
+    <p><%= @manage.totaltime %></p>
+    <p><%= @manage.hurry %></p>
+    <p><%= @manage.created_at %></p>
+</div>
+
+<%= link_to "Task一覧に戻る", manages_path %>

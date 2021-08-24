@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: MyString
+  due: 2021-08-24
+  totaltime: 
+  hurry: 1
+
+two:
+  task: MyString
+  due: 2021-08-24
+  totaltime: 
+  hurry: 1
