@@ -3,7 +3,7 @@ class ManagesController < ApplicationController
     before_action :authenticate_user!
 
     def start
-        
+        @manages = Manage.all
     end
 
     def index

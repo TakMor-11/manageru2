@@ -10,7 +10,6 @@
     <title>Document</title>
     <%= stylesheet_link_tag 'start', :media => "all" %>
     <div id='user' data-json='{"key":"value"}'></div>
-
     
 </head>
 <body>
@@ -19,13 +18,37 @@
     <% if user_signed_in? %>
         <%= link_to "マイページへ", user_path(current_user.id) %>　
     <% end %>
-
+    <div class="manages-container">
+    <% @manages.each do |t| %>
+        <div class="manage"> 
+            <%= t.task %>
+            <div id ="due">
+                <%= t.due %>
+            </div>
+            <div id ="totaltime">
+                <%= t.totaltime %>
+            </div>
+            <div id ="hurry">
+                <%= t.hurry %>
+            </div>
+            <div id="hpd">
+                <%= t.user.hpd %>
+            </div>
+            <div id="active">
+                <%= t.user.active %>
+            </div>
+            <div id="rest">
+                <%= t.user.rest %>
+            </div>
+        </div>
+    <% end %>
+    </div>
     <main>
         <div class="block">
             <div class="blackBox">
                 <p id = "text"></p>
                 <div class="msk">
-                    <p id="timer">00:00.000</p>
+                    <p id="timer">00:00</p>
                 </div>
                 <button class="start" id="start">Start</button>
                 <button class="reset" id="reset">Reset</button>
@@ -36,10 +59,176 @@
             
         </div>
     </main>
-    <script src="timer.js">
-        <div class = "simple">
-            
-        </div>
+    <script>
+        function DomAcquisition(element) {
+    return document.querySelector(element)
+}
+// 変数・定数・配列
+const timer = DomAcquisition("#timer")
+const start = DomAcquisition("#start")
+
+const due = document.getElementById("due")
+const totaltime = document.getElementById("totaltime")
+const hurry = document.getElementById("hurry")
+const hpd = document.getElementById("hpd")
+const active = document.getElementById("active")
+const rest = document.getElementById("rest")
+
+parseInt(due.innerText)
+parseInt(totaltime.innerText)
+parseInt(hurry.innerText)
+parseInt(hpd.innerText)
+parseInt(active.innerText)
+parseInt(rest.innerText)
+
+const reset = DomAcquisition("#reset")
+const plusButton = DomAcquisition("#up")
+const minusButton = DomAcquisition("#down")
+const buttons = [start, reset, plusButton, minusButton]
+
+
+//自分もやってみる
+
+function getSets(sets) {
+    sets = hpd/(active+rest)
+}
+
+
+//以下でタイマーを実装している
+let startTime;
+let remainingTime = 0;
+let elapsedTime = 0;
+let timeLeft;
+let timeId;
+let run = false
+
+//関数
+function forlogs(elments) {
+    elments.forEach(elment => console.log(elment));
+}
+
+function classChange(element, className, num) {
+    switch (num) {
+        case 1:
+            element.classList.add(className);
+            break;
+        case 2:
+            element.classList.remove(className);;
+            break;
+        case 3:
+            element.classList.toggle(className);;
+            break;
+    }
+}
+function addEvent(eventTarget, eventName, callBack) {
+    eventTarget.addEventListener(eventName, callBack)
+}
+function InsertText(el, content) {
+    el.textContent = content
+}
+function updateTimer(t) {
+    let d = new Date(t)
+    let m = d.getMinutes()
+    let s = d.getSeconds()
+    //let ms = d.getMilliseconds()
+    m = m.toString().padStart(2, "0")
+    s = s.toString().padStart(2, "0")
+    //ms = ms.toString().padStart(3, "0")
+    timer.textContent = `${m}:${s}`
+    //.${ms}
+}
+function timeCountDown() {
+    timerId = setInterval(function () {
+        elapsedTime = new Date() - startTime
+        timeLeft = remainingTime - elapsedTime
+        updateTimer(timeLeft)
+        if (timeLeft <= 0) {
+            clearInterval(timerId)
+            remainingTime = 0
+            timeLeft = 0
+            run = false
+            InsertText(start, "Start")
+            return updateTimer(timeLeft)
+        }
+    }, 10);
+}
+function timeSet(sign) {
+    switch (sign) {
+        case "+":
+            remainingTime += 1000 * 60
+            break;
+        case "-":
+            remainingTime -= 1000 * 60
+            break;
+    }
+    updateTimer(remainingTime)
+}
+function startClickEvent() {
+    if (remainingTime <= 0) { return }
+    if (run === false) {
+        startTime = new Date()
+        timeCountDown()
+        run = true
+        InsertText(start, "Stop")
+    } else {
+        InsertText(start, "Start")
+        remainingTime = timeLeft
+        console.log(remainingTime);
+        clearInterval(timerId)
+        updateTimer(timeLeft)
+        run = false
+    }
+}
+function resetClickEvent() {
+    clearInterval(timerId)
+    remainingTime = 0
+    timeLeft = 0
+    run = false
+    InsertText(start, "Start")
+    return updateTimer(remainingTime)
+}
+
+
+function plusButtonClickEvent() {
+    if (run === false) { timeSet("+") }
+}
+
+function minusButtonClickEvent() {
+    if (run == false && remainingTime > 0) { timeSet("-") }
+}
+
+function MouseoverAndMouseleaveEvent() {
+    classChange(this, "active", 1)
+    this.addEventListener("mouseleave", () => classChange(this, "active", 2))
+}
+
+function buttonsEvents(eventName) {
+    buttons.forEach(eventTarget => {
+        if (eventName === "mouseover") {
+            addEvent(eventTarget, eventName, MouseoverAndMouseleaveEvent)
+        } else {
+
+            switch (eventTarget) {
+                case start:
+                    addEvent(eventTarget, eventName, startClickEvent)
+                    break;
+                case reset:
+                    addEvent(eventTarget, eventName, resetClickEvent)
+                    break;
+                case plusButton:
+                    addEvent(eventTarget, eventName, plusButtonClickEvent)
+                    break;
+                case minusButton:
+                    addEvent(eventTarget, eventName, minusButtonClickEvent)
+                    break;
+            }
+        }
+    })
+}
+
+// 処理呼び出し
+const eventNames = ["mouseover", "click"]
+eventNames.forEach(eventName => { buttonsEvents(eventName) })
     </script>
 </body>
 </html>
