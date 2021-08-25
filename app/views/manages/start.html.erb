@@ -48,7 +48,7 @@
             <div class="blackBox">
                 <p id = "text"></p>
                 <div class="msk">
-                    <p id="timer">00:00</p>
+                    <p id="timer">50:00</p>
                 </div>
                 <button class="start" id="start">Start</button>
                 <button class="reset" id="reset">Reset</button>
@@ -77,9 +77,10 @@ const rest = document.getElementById("rest")
 parseInt(due.innerText)
 parseInt(totaltime.innerText)
 parseInt(hurry.innerText)
-parseInt(hpd.innerText)
-parseInt(active.innerText)
-parseInt(rest.innerText)
+
+const str_hpd = hpd.toString()
+const str_active = active.toString()
+const str_rest = rest.toString()
 
 const reset = DomAcquisition("#reset")
 const plusButton = DomAcquisition("#up")
@@ -90,17 +91,22 @@ const buttons = [start, reset, plusButton, minusButton]
 //自分もやってみる
 
 function getSets(sets) {
-    sets = hpd/(active+rest)
+    sets = str_hpd/(str_active+str_rest)
 }
+
+
+
 
 
 //以下でタイマーを実装している
 let startTime;
-let remainingTime = 0;
+let remainingTime = active*60*1000;
 let elapsedTime = 0;
 let timeLeft;
 let timeId;
 let run = false
+
+//let premerTime = 100000 * 60
 
 //関数
 function forlogs(elments) {
