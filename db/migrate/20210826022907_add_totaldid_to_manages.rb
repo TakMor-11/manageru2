@@ -1,0 +1,5 @@
+class AddTotaldidToManages < ActiveRecord::Migration[6.1]
+  def change
+    add_column :manages, :totaldid, :bigint
+  end
+end
