@@ -48,12 +48,12 @@
             <div class="blackBox">
                 <p id = "text"></p>
                 <div class="msk">
-                    <p id="timer">50:00</p>
+                    <p id="timer">はじめよう！</p>
                 </div>
                 <button class="start" id="start">Start</button>
                 <button class="reset" id="reset">Reset</button>
-                <button class="up" id="up">+</button>
-                <button class="down" id="down">-</button>
+            <button class="up" id="up">+</button>
+            <button class="down" id="down">-</button>
             </div>
 
             
@@ -134,13 +134,15 @@ function InsertText(el, content) {
 }
 function updateTimer(t) {
     let d = new Date(t)
+    let h = d.getHours()
     let m = d.getMinutes()
     let s = d.getSeconds()
     //let ms = d.getMilliseconds()
+    h = h.toString().padStart(2, "0")
     m = m.toString().padStart(2, "0")
     s = s.toString().padStart(2, "0")
     //ms = ms.toString().padStart(3, "0")
-    timer.textContent = `${m}:${s}`
+    timer.textContent = `${h-9}:${m}:${s}`
     //.${ms}
 }
 function timeCountDown() {
