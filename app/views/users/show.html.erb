@@ -12,6 +12,7 @@
 
 <h2>ユーザーの投稿一覧</h2>
 <% @user.manages.each do |t| %>
+    <%= t.id %>
     <%= t.user.name %>
     <%= t.task %>
     <%= t.due %>
