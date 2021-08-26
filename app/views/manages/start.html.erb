@@ -22,20 +22,46 @@
     <% @manages.each do |t| %>
         <div class="manage"> 
             <%= t.id %>
+
+            タスク名「<%= t.task %>」
+            期限
+
             <p>・タスク名</p>
             <p><%= t.task %></p>
             <p>・期限日</p>
+
             <div id ="due">
                 <p><%= t.due %></p>
             </div>
+
+            目標時間
+
             <p>・目標合計時間</p>
+
             <div id ="totaltime">
                 <p><%= t.totaltime %></p>
             </div>
+           <div id ="totaldid">
+                <%= t.totaldid %>
+            </div>
+            急ぎ度合い
+
             <p>・急ぎ度合い</p>
+
             <div id ="hurry">
                 <p><%= t.hurry %></p>
             </div>
+
+            
+            <div id="hpd" hidden>
+                <%= t.user.hpd %>
+            </div>
+            <div id="active" hidden>
+               　<%= t.user.active %>
+            </div>
+            <div id="rest" hidden>
+                <%= t.user.rest %>
+
             <p>・1日の学習時間</p>
             <div id="hpd">
                 <p><%= t.user.hpd %></p>
@@ -47,7 +73,10 @@
             <p>・休憩時間</p>
             <div id="rest">
                 <p><%= t.user.rest %></p>
+
             </div>
+            <p> </p>
+
         </div>
     <% end %>
     </div>
@@ -63,7 +92,23 @@
                 <button class="up" id="up">+5分</button>
                 <button class="down" id="down">-5分</button>
                     <p id = "kei">残り</p>
+
+                    <p id = "total1" hidden><%= @manages[0]['totaltime'] %></p>
+                    <p id = "total2" hidden><%= @manages[1]['totaltime'] %></p>
+                    <p id = "total3" hidden><%= @manages[2]['totaltime'] %></p>
+                    <p id = "did1" hidden><%= @manages[0]['totaldid'] %></p>
+                    <p id = "did2" hidden><%= @manages[1]['totaldid'] %></p>
+                    <p id = "did3" hidden><%= @manages[2]['totaldid'] %></p>
+                    <p id = "hurry1" hidden><%= @manages[0]['hurry'] %></p>
+                    <p id = "hurry2" hidden><%= @manages[1]['hurry'] %></p>
+                    <p id = "hurry3" hidden><%= @manages[2]['hurry'] %></p>
+                    <p id = "due1" hidden><%= @manages[0]['due'] %></p>
+                    <p id = "due2" hidden><%= @manages[1]['due'] %></p>
+                    <p id = "due3" hidden><%= @manages[2]['due'] %></p>
+
+
                     <%= @manages[2]['totaltime'] %>
+
 
             </div>
 
@@ -86,6 +131,7 @@ const start = DomAcquisition("#start")
 
 const due = document.getElementById("due")
 const totaltime = document.getElementById("totaltime")
+const totaldid = document.getElementById("totaldid")
 const hurry = document.getElementById("hurry")
 const hpd = document.getElementById("hpd")
 const active = document.getElementById("active")
@@ -176,6 +222,7 @@ function timeCountDown() {
             return updateTimer(timeLeft)
         }
     }, 10);
+    
 }
 function timeSet(sign) {
     switch (sign) {
@@ -188,10 +235,41 @@ function timeSet(sign) {
     }
     updateTimer(remainingTime)
 }
+
+let day=0;
 function keisan(){
-    keisanhen = totaltime.innerText
-    
-    kei.textContent = `${keisanhen}`
+    day=new Date()
+    hpdall=parseInt(hpd.innerText)
+    activeall=parseInt(active.innerText)
+
+    total1 = parseInt(total1.innerText)
+    total2 = parseInt(total2.innerText)
+    total3 = parseInt(total3.innerText)
+    did1 = parseInt(did1.innerText)
+    did2 = parseInt(did2.innerText)
+    did3 = parseInt(did3.innerText)
+    hurry1 = parseInt(hurry1.innerText)
+    hurry2 = parseInt(hurry2.innerText)
+    hurry3 = parseInt(hurry3.innerText)
+    hurryall=hurry1+hurry2+hurry3
+    due1 = new Date(document.getElementById('due1').innerText)
+    due2 = new Date(document.getElementById('due2').innerText)
+    due3 = new Date(document.getElementById('due3').innerText)
+    duetime1=Math.ceil((due1-day)/(24*60*60*1000))
+    duetime2=Math.ceil((due2-day)/(24*60*60*1000))
+    duetime3=Math.ceil((due3-day)/(24*60*60*1000))
+    duetimeall=(total1-did1)/duetime1+(total2-did2)/duetime2+(total3-did3)/duetime3
+    moto1=(total1-did1)/duetime1+(hpdall-duetimeall)*hurry1/hurryall*60
+    moto2=(total2-did2)/duetime2+(hpdall-duetimeall)*hurry2/hurryall*60
+    moto3=(total3-did3)/duetime3+(hpdall-duetimeall)*hurry3/hurryall*60
+    syou1=Math.floor(moto1/activeall)
+    syou2=Math.floor(moto2/activeall)
+    syou3=Math.floor(moto3/activeall)
+    amari1=moto1%activeall
+    amari2=moto2%activeall
+    amari3=moto3%activeall
+
+    kei.textContent = `${amari1}+${amari2}+${amari3}`
     
     
 }
