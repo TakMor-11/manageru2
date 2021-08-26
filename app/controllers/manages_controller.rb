@@ -49,6 +49,6 @@ class ManagesController < ApplicationController
     
     private
     def manage_params
-        params.require(:manage).permit(:task, :due, :totaltime, :hurry)
+        params.require(:manage).permit(:task, :due, :totaltime, :hurry, :totaldid)
     end
 end
