@@ -56,8 +56,7 @@
                 <button class="up" id="up">+5分</button>
                 <button class="down" id="down">-5分</button>
                     <p id = "kei">残り</p>
-                    <%= @manages[1]['totaltime'] %>
-
+                    <%= @manages[1]['totaltime']*10 %>
             </div>
 
             <form action="1" method="patch" id="time-form">
@@ -182,6 +181,7 @@ function timeSet(sign) {
     }
     updateTimer(remainingTime)
 }
+
 function keisan(){
     keisanhen = totaltime.innerText
     
