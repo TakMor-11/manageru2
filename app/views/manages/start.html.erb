@@ -22,24 +22,31 @@
     <% @manages.each do |t| %>
         <div class="manage"> 
             <%= t.id %>
-            <p>タスク名 「<%= t.task %>」</p>
+            <p>・タスク名</p>
+            <p><%= t.task %></p>
+            <p>・期限日</p>
             <div id ="due">
-                <p>期限 : <%= t.due %></p>
+                <p><%= t.due %></p>
             </div>
+            <p>・目標合計時間</p>
             <div id ="totaltime">
-                <p>目標時間 : <%= t.totaltime %></p>
+                <p><%= t.totaltime %></p>
             </div>
+            <p>・急ぎ度合い</p>
             <div id ="hurry">
-                <p>急ぎ度合い : <%= t.hurry %></p>
+                <p><%= t.hurry %></p>
             </div>
+            <p>・1日の学習時間</p>
             <div id="hpd">
-                <p>1日の学習時間 : <%= t.user.hpd %></p>
+                <p><%= t.user.hpd %></p>
             </div>
+            <p>・学習時間</p>
             <div id="active">
-                <p>学習時間 : <%= t.user.active %></p>
+                <p><%= t.user.active %></p>
             </div>
+            <p>・休憩時間</p>
             <div id="rest">
-                <p>休憩時間 : <%= t.user.rest %></p>
+                <p><%= t.user.rest %></p>
             </div>
         </div>
     <% end %>
