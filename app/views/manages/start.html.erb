@@ -22,24 +22,24 @@
     <% @manages.each do |t| %>
         <div class="manage"> 
             <%= t.id %>
-            <%= t.task %>
+            <p>タスク名 「<%= t.task %>」</p>
             <div id ="due">
-                <%= t.due %>
+                <p>期限 : <%= t.due %></p>
             </div>
             <div id ="totaltime">
-                <%= t.totaltime %>
+                <p>目標時間 : <%= t.totaltime %></p>
             </div>
             <div id ="hurry">
-                <%= t.hurry %>
+                <p>急ぎ度合い : <%= t.hurry %></p>
             </div>
             <div id="hpd">
-                <%= t.user.hpd %>
+                <p>1日の学習時間 : <%= t.user.hpd %></p>
             </div>
             <div id="active">
-                <%= t.user.active %>
+                <p>学習時間 : <%= t.user.active %></p>
             </div>
             <div id="rest">
-                <%= t.user.rest %>
+                <p>休憩時間 : <%= t.user.rest %></p>
             </div>
         </div>
     <% end %>
@@ -56,7 +56,7 @@
                 <button class="up" id="up">+5分</button>
                 <button class="down" id="down">-5分</button>
                     <p id = "kei">残り</p>
-                    <%= @manages[1]['totaltime'] %>
+                    <%= @manages[2]['totaltime'] %>
 
             </div>
 
@@ -102,7 +102,7 @@ const buttons = [start, reset, plusButton, minusButton]
 
 function getSets(sets) {
     sets = str_hpd/(str_active+str_rest)
-}
+} 
 
 
 
