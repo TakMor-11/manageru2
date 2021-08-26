@@ -1,12 +1,12 @@
 <h1>Manageru</h1>
 <h3>Task詳細</h3>
 <div class="manage">
-    <p><%= @manage.task %></p>
-    <p><%= @manage.due %></p>
-    <p><%= @manage.totaltime %></p>
-    <p><%= @manage.hurry %></p>
-    <p><%= @manage.created_at %></p>
-    <p><%= @manage.totaldid %></p>
+    <p>タスク名「<%= @manage.task %>」</p>
+    <p>期限<%= @manage.due %></p>
+    <p>目標時間<%= @manage.totaltime %>h</p>
+    <p>経過時間<%= @manage.totaldid %>h</p>
+    <p>急ぎ度合い<%= @manage.hurry %>/5</p>
+    <p>作成日<%= @manage.created_at %></p>
 </div>
 <%= link_to "編集する", edit_manage_path(@manage.id) %>
 <%= link_to "Task一覧に戻る", manages_path %>

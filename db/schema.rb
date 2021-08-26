@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_022907) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.bigint "totaldid" default: 0
+    t.bigint "totaldid"
   end
 
   create_table "users", force: :cascade do |t|

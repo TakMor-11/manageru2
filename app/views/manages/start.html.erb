@@ -21,6 +21,7 @@
     <div class="manages-container">
     <% @manages.each do |t| %>
         <div class="manage"> 
+            <%= t.id %>
             <%= t.task %>
             <div id ="due">
                 <%= t.due %>
@@ -54,6 +55,9 @@
                 <button class="reset" id="reset">Reset</button>
                 <button class="up" id="up">+5分</button>
                 <button class="down" id="down">-5分</button>
+                    <p id = "kei">残り</p>
+                    <%= @manages[1]['totaltime'] %>
+
             </div>
 
             <form action="1" method="patch" id="time-form">
@@ -65,6 +69,10 @@
         function DomAcquisition(element) {
     return document.querySelector(element)
 }
+// 変数・定数・配列お試し
+
+
+
 // 変数・定数・配列
 const timer = DomAcquisition("#timer")
 const start = DomAcquisition("#start")
@@ -173,6 +181,13 @@ function timeSet(sign) {
     }
     updateTimer(remainingTime)
 }
+function keisan(){
+    keisanhen = totaltime.innerText
+    
+    kei.textContent = `${keisanhen}`
+    
+    
+}
 function startClickEvent() {
     if (remainingTime <= 0) { return }
     if (run === false) {
@@ -180,6 +195,7 @@ function startClickEvent() {
         timeCountDown()
         run = true
         InsertText(start, "Stop")
+        keisan()
     } else {
         InsertText(start, "Start")
         remainingTime = timeLeft
