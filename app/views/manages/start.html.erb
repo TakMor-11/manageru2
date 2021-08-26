@@ -52,8 +52,8 @@
                 </div>
                 <button class="start" id="start">Start</button>
                 <button class="reset" id="reset">Reset</button>
-            <button class="up" id="up">+</button>
-            <button class="down" id="down">-</button>
+                <button class="up" id="up">+5分</button>
+                <button class="down" id="down">-5分</button>
             </div>
 
             
@@ -163,10 +163,10 @@ function timeCountDown() {
 function timeSet(sign) {
     switch (sign) {
         case "+":
-            remainingTime += 1000 * 60
+            remainingTime += 1000 * 60*5
             break;
         case "-":
-            remainingTime -= 1000 * 60
+            remainingTime -= 1000 * 60*5
             break;
     }
     updateTimer(remainingTime)
