@@ -5,6 +5,7 @@
 <div class="manages-container">
     <% @manages.each do |t| %>
         <div class="manage">
+            <%= t.id %>
             <%= t.task %>
             <%= t.due %>
             <%= t.totaltime %>
