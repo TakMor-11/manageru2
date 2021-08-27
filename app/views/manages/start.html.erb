@@ -41,7 +41,7 @@
             <div id ="totaltime">
                 <p><%= t.totaltime %></p>
             </div>
-           <div id ="totaldid">
+            <div id ="totaldid">
                 <%= t.totaldid %>
             </div>
             急ぎ度合い
@@ -57,7 +57,7 @@
                 <%= t.user.hpd %>
             </div>
             <div id="active" hidden>
-               　<%= t.user.active %>
+                <%= t.user.active %>
             </div>
             <div id="rest" hidden>
                 <%= t.user.rest %>
@@ -105,6 +105,7 @@
                     <p id = "due1" hidden><%= @manages[0]['due'] %></p>
                     <p id = "due2" hidden><%= @manages[1]['due'] %></p>
                     <p id = "due3" hidden><%= @manages[2]['due'] %></p>
+                    
 
 
                     <%= @manages[2]['totaltime'] %>
@@ -271,8 +272,10 @@ function keisan(){
 
     kei.textContent = `${amari1}+${amari2}+${amari3}`
     
-    
+    sumsyou = Math.round(syou1+syou2+syou3)
 }
+
+
 function startClickEvent() {
     if (remainingTime <= 0) { return }
     if (run === false) {
