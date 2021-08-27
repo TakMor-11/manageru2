@@ -26,7 +26,6 @@
             タスク名「<%= t.task %>」
             期限
 
-            <p>・タスク名</p>
             <p><%= t.task %></p>
             <p>・期限日</p>
 
@@ -36,8 +35,6 @@
 
             目標時間
 
-            <p>・目標合計時間</p>
-
             <div id ="totaltime">
                 <p><%= t.totaltime %></p>
             </div>
@@ -45,8 +42,6 @@
                 <%= t.totaldid %>
             </div>
             急ぎ度合い
-
-            <p>・急ぎ度合い</p>
 
             <div id ="hurry">
                 <p><%= t.hurry %></p>
@@ -92,7 +87,10 @@
                 <button class="up" id="up">+5分</button>
                 <button class="down" id="down">-5分</button>
                     <p id = "kei">残り</p>
-
+                    <p id = "tasknow">タスク</p>
+                    <p id = "task1" hidden><%= @manages[0]['task'] %></p>
+                    <p id = "task2" hidden><%= @manages[1]['task'] %></p>
+                    <p id = "task3" hidden><%= @manages[2]['task'] %></p>
                     <p id = "total1" hidden><%= @manages[0]['totaltime'] %></p>
                     <p id = "total2" hidden><%= @manages[1]['totaltime'] %></p>
                     <p id = "total3" hidden><%= @manages[2]['totaltime'] %></p>
@@ -105,10 +103,10 @@
                     <p id = "due1" hidden><%= @manages[0]['due'] %></p>
                     <p id = "due2" hidden><%= @manages[1]['due'] %></p>
                     <p id = "due3" hidden><%= @manages[2]['due'] %></p>
-                    
 
 
                     <%= @manages[2]['totaltime'] %>
+                    
 
 
             </div>
@@ -238,6 +236,32 @@ function timeSet(sign) {
 }
 
 let day=0;
+let sumsyou = 0;
+
+//配列をくっつけるための関数
+function pushTwoDimensionalArray(array1, array2){
+    var array3 = [];
+      //　縦方向の追加
+    array3 = array1.slice();
+    for(var i = 0; i < array2.length; i++){
+        array3.push(array2[i]);
+    }
+}
+
+//ランダムにするための関数
+function arrayShuffle(array) {
+    for(var i = (array.length - 1); 0 < i; i--){
+
+    // 0〜(i+1)の範囲で値を取得
+    var r = Math.floor(Math.random() * (i + 1));
+
+    // 要素の並び替えを実行
+    var tmp = array[i];
+    array[i] = array[r];
+    array[r] = tmp;
+}
+    return array;
+}
 function keisan(){
     day=new Date()
     hpdall=parseInt(hpd.innerText)
@@ -273,7 +297,38 @@ function keisan(){
     kei.textContent = `${amari1}+${amari2}+${amari3}`
     
     sumsyou = Math.round(syou1+syou2+syou3)
+
+//idの配列生成
+var arid = new Array(sumsyou);
+for (let i=0; i<syou1; i++) {
+    arid[i] = 1;
 }
+for (let i=syou1; i<syou2; i++) {
+    arid[i] = 2;
+}
+for (let i=syou2; i<syou3; i++) {
+    arid[i] = 3;
+}
+
+//task名の配列生成
+var arname = new Array(sumsyou);
+for (let i=0; i<syou1; i++) {
+    arname[i] = task1;
+}
+for (let i=syou1; i<syou2; i++) {
+    arname[i] = task2;
+}
+for (let i=syou2; i<syou3; i++) {
+    arname[i] = task3;
+}
+//配列を行で結合
+pushTwoDimensionalArray(arid, arname);
+console.log(arrayShuffle(arname));
+
+}
+
+
+
 
 
 function startClickEvent() {
