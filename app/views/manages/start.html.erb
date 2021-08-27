@@ -126,29 +126,29 @@
 
 
 // 変数・定数・配列
-const timer = DomAcquisition("#timer")
-const start = DomAcquisition("#start")
+var timer = DomAcquisition("#timer")
+var start = DomAcquisition("#start")
 
-const due = document.getElementById("due")
-const totaltime = document.getElementById("totaltime")
-const totaldid = document.getElementById("totaldid")
-const hurry = document.getElementById("hurry")
-const hpd = document.getElementById("hpd")
-const active = document.getElementById("active")
-const rest = document.getElementById("rest")
+var due = document.getElementById("due")
+var totaltime = document.getElementById("totaltime")
+var totaldid = document.getElementById("totaldid")
+var hurry = document.getElementById("hurry")
+var hpd = document.getElementById("hpd")
+var active = document.getElementById("active")
+var rest = document.getElementById("rest")
 
 parseInt(due.innerText)
 parseInt(totaltime.innerText)
 parseInt(hurry.innerText)
 
-const str_hpd = hpd.toString()
-const str_active = active.toString()
-const str_rest = rest.toString()
+var str_hpd = hpd.toString()
+var str_active = active.toString()
+var str_rest = rest.toString()
 
-const reset = DomAcquisition("#reset")
-const plusButton = DomAcquisition("#up")
-const minusButton = DomAcquisition("#down")
-const buttons = [start, reset, plusButton, minusButton]
+var reset = DomAcquisition("#reset")
+var plusButton = DomAcquisition("#up")
+var minusButton = DomAcquisition("#down")
+var buttons = [start, reset, plusButton, minusButton]
 
 
 //自分もやってみる
@@ -162,12 +162,12 @@ function getSets(sets) {
 
 
 //以下でタイマーを実装している
-let startTime;
-let remainingTime = parseInt(active.innerText)*60*1000;
-let elapsedTime = 0;
-let timeLeft;
-let timeId;
-let run = false
+var startTime;
+var remainingTime = parseInt(active.innerText)*60*1000;
+var elapsedTime = 0;
+var timeLeft;
+var timeId;
+var run = false
 
 //let premerTime = 100000 * 60
 
@@ -236,7 +236,7 @@ function timeSet(sign) {
     updateTimer(remainingTime)
 }
 
-let day=0;
+var day=0;
 function keisan(){
     day=new Date()
     hpdall=parseInt(hpd.innerText)
@@ -338,7 +338,7 @@ function buttonsEvents(eventName) {
 }
 
 // 処理呼び出し
-const eventNames = ["mouseover", "click"]
+var eventNames = ["mouseover", "click"]
 eventNames.forEach(eventName => { buttonsEvents(eventName) })
     </script>
 </body>
