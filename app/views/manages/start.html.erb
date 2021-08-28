@@ -10,12 +10,58 @@
 </head>
 <body>
     <h1>さぁ、始めよう！</h1>
-    <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    <div class="logmy">
+    <%= button_to 'ログアウト', destroy_user_session_path, {method: :delete,class:"btn btn--orange btn--radius"} %>
+    <p></p>
     <% if user_signed_in? %>
-        <%= link_to "マイページへ", user_path(current_user.id) %>　
+        <%= link_to "マイページへ", user_path(current_user.id),{class:"bbtn bbtn--orange bbtn--radius"} %>　
     <% end %>
-    <div class="manages-container">
-    <% @manages.each do |t| %>
+    </div>
+    
+    <main>
+        <div class="block">
+
+            <div class="blackBox">
+                <p id = "text"></p>
+                <div class="msk">
+                    <p id="timer">やるぞ!！</p>
+                </div>
+                <button class="start" id="start">Start</button>
+                <button class="reset" id="reset">Reset</button>
+                <button class="up" id="up">+5分</button>
+                <button class="down" id="down">-5分</button>
+                    <div id = "kei">残り
+
+                    <p id = "total1" hidden><%= @manages[0]['totaltime'] %></p>
+                    <p id = "total2" hidden><%= @manages[1]['totaltime'] %></p>
+                    <p id = "total3" hidden><%= @manages[2]['totaltime'] %></p>
+                    <p id = "did1" hidden><%= @manages[0]['totaldid'] %></p>
+                    <p id = "did2" hidden><%= @manages[1]['totaldid'] %></p>
+                    <p id = "did3" hidden><%= @manages[2]['totaldid'] %></p>
+                    <p id = "hurry1" hidden><%= @manages[0]['hurry'] %></p>
+                    <p id = "hurry2" hidden><%= @manages[1]['hurry'] %></p>
+                    <p id = "hurry3" hidden><%= @manages[2]['hurry'] %></p>
+                    <p id = "due1" hidden><%= @manages[0]['due'] %></p>
+                    <p id = "due2" hidden><%= @manages[1]['due'] %></p>
+                    <p id = "due3" hidden><%= @manages[2]['due'] %></p>
+
+                    <p id = "task2" hidden><%= @manages[1]['task'] %></p>
+
+
+                    <%= @manages[2]['totaltime'] %>
+                    </div>
+
+
+            </div>
+
+            <form action="1" method="patch" id="time-form">
+                <input type="hidden" name="id" id="id" value="1">
+            </form>
+        </div>
+    </main>
+    
+    <div class="manages_container">
+        <% @manages.each do |t| %>
         <div class="manage"> 
             <%= t.id %>
 
@@ -74,45 +120,8 @@
             <p> </p>
 
         </div>
-    <% end %>
+        <% end %>
     </div>
-    <main>
-        <div class="block">
-            <div class="blackBox">
-                <p id = "text"></p>
-                <div class="msk">
-                    <p id="timer">はじめよう！</p>
-                </div>
-                <button class="start" id="start">Start</button>
-                <button class="reset" id="reset">Reset</button>
-                <button class="up" id="up">+5分</button>
-                <button class="down" id="down">-5分</button>
-                    <p id = "kei">残り</p>
-
-                    <p id = "total1" hidden><%= @manages[0]['totaltime'] %></p>
-                    <p id = "total2" hidden><%= @manages[1]['totaltime'] %></p>
-                    <p id = "total3" hidden><%= @manages[2]['totaltime'] %></p>
-                    <p id = "did1" hidden><%= @manages[0]['totaldid'] %></p>
-                    <p id = "did2" hidden><%= @manages[1]['totaldid'] %></p>
-                    <p id = "did3" hidden><%= @manages[2]['totaldid'] %></p>
-                    <p id = "hurry1" hidden><%= @manages[0]['hurry'] %></p>
-                    <p id = "hurry2" hidden><%= @manages[1]['hurry'] %></p>
-                    <p id = "hurry3" hidden><%= @manages[2]['hurry'] %></p>
-                    <p id = "due1" hidden><%= @manages[0]['due'] %></p>
-                    <p id = "due2" hidden><%= @manages[1]['due'] %></p>
-                    <p id = "due3" hidden><%= @manages[2]['due'] %></p>
-
-
-                    <%= @manages[2]['totaltime'] %>
-
-
-            </div>
-
-            <form action="1" method="patch" id="time-form">
-                <input type="hidden" name="id" id="id" value="1">
-            </form>
-        </div>
-    </main>
     <script>
         function DomAcquisition(element) {
     return document.querySelector(element)
@@ -264,10 +273,14 @@ function keisan(){
     amari1=moto1%activeall
     amari2=moto2%activeall
     amari3=moto3%activeall
+    sumama=amari1+amari2+amari3
 
-    kei.textContent = `${amari1}+${amari2}+${amari3}`
-    
-    
+
+    ///kei.textContent = `${sumama}`
+    task2 = task2.innerText
+
+    kei.textContent = `${task2}:${5}`
+   
 }
 function startClickEvent() {
     if (remainingTime <= 0) { return }
