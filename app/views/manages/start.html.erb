@@ -70,7 +70,7 @@
                 <p><%= t.user.rest %></p>
 
             </div>
-            <p> </p>
+            <%= link_to "編集する", edit_manage_path(t.id) %>
 
         </div>
     <% end %>
@@ -223,6 +223,237 @@ function timeCountDown() {
     }, 10);
     
 }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%= stylesheet_link_tag 'start', :media => "all" %>
+    <div id='user' data-json='{"key":"value"}'></div>
+    
+</head>
+<body>
+    <h1>さぁ、始めよう！</h1>
+    <div class="logmy">
+    <%= button_to 'ログアウト', destroy_user_session_path, {method: :delete,class:"btn btn--orange btn--radius"} %>
+    <p></p>
+    <% if user_signed_in? %>
+        <%= link_to "マイページへ", user_path(current_user.id),{class:"bbtn bbtn--orange bbtn--radius"} %>　
+    <% end %>
+    </div>
+    
+    <main>
+        <div class="block">
+
+            <div class="blackBox">
+                <p id = "text"></p>
+                <div class="msk">
+                    <p id="timer">やるぞ!！</p>
+                </div>
+                <button class="start" id="start">Start</button>
+                <button class="reset" id="reset">Reset</button>
+                <button class="up" id="up">+5分</button>
+                <button class="down" id="down">-5分</button>
+                    <div id = "kei">残り
+
+                    <p id = "total1" hidden><%= @manages[0]['totaltime'] %></p>
+                    <p id = "total2" hidden><%= @manages[1]['totaltime'] %></p>
+                    <p id = "total3" hidden><%= @manages[2]['totaltime'] %></p>
+                    <p id = "did1" hidden><%= @manages[0]['totaldid'] %></p>
+                    <p id = "did2" hidden><%= @manages[1]['totaldid'] %></p>
+                    <p id = "did3" hidden><%= @manages[2]['totaldid'] %></p>
+                    <p id = "hurry1" hidden><%= @manages[0]['hurry'] %></p>
+                    <p id = "hurry2" hidden><%= @manages[1]['hurry'] %></p>
+                    <p id = "hurry3" hidden><%= @manages[2]['hurry'] %></p>
+                    <p id = "due1" hidden><%= @manages[0]['due'] %></p>
+                    <p id = "due2" hidden><%= @manages[1]['due'] %></p>
+                    <p id = "due3" hidden><%= @manages[2]['due'] %></p>
+
+                    <p id = "task2" hidden><%= @manages[1]['task'] %></p>
+
+
+                    <%= @manages[2]['totaltime'] %>
+                    </div>
+
+
+            </div>
+
+            <form action="1" method="patch" id="time-form">
+                <input type="hidden" name="id" id="id" value="1">
+            </form>
+        </div>
+    </main>
+    
+    <div class="manages_container">
+        <% @manages.each do |t| %>
+        <div class="manage"> 
+            <%= t.id %>
+
+            タスク名「<%= t.task %>」
+            期限
+
+            <p>・タスク名</p>
+            <p><%= t.task %></p>
+            <p>・期限日</p>
+
+            <div id ="due">
+                <p><%= t.due %></p>
+            </div>
+
+            目標時間
+
+            <p>・目標合計時間</p>
+
+            <div id ="totaltime">
+                <p><%= t.totaltime %></p>
+            </div>
+           <div id ="totaldid">
+                <%= t.totaldid %>
+            </div>
+            急ぎ度合い
+
+            <p>・急ぎ度合い</p>
+
+            <div id ="hurry">
+                <p><%= t.hurry %></p>
+            </div>
+
+            
+            <div id="hpd" hidden>
+                <%= t.user.hpd %>
+            </div>
+            <div id="active" hidden>
+               　<%= t.user.active %>
+            </div>
+            <div id="rest" hidden>
+                <%= t.user.rest %>
+
+            <p>・1日の学習時間</p>
+            <div id="hpd">
+                <p><%= t.user.hpd %></p>
+            </div>
+            <p>・学習時間</p>
+            <div id="active">
+                <p><%= t.user.active %></p>
+            </div>
+            <p>・休憩時間</p>
+            <div id="rest">
+                <p><%= t.user.rest %></p>
+
+            </div>
+            <p> </p>
+
+        </div>
+        <% end %>
+    </div>
+    <script>
+        function DomAcquisition(element) {
+    return document.querySelector(element)
+}
+// 変数・定数・配列お試し
+
+
+
+// 変数・定数・配列
+var timer = DomAcquisition("#timer")
+var start = DomAcquisition("#start")
+
+var due = document.getElementById("due")
+var totaltime = document.getElementById("totaltime")
+var totaldid = document.getElementById("totaldid")
+var hurry = document.getElementById("hurry")
+var hpd = document.getElementById("hpd")
+var active = document.getElementById("active")
+var rest = document.getElementById("rest")
+
+parseInt(due.innerText)
+parseInt(totaltime.innerText)
+parseInt(hurry.innerText)
+
+var str_hpd = hpd.toString()
+var str_active = active.toString()
+var str_rest = rest.toString()
+
+var reset = DomAcquisition("#reset")
+var plusButton = DomAcquisition("#up")
+var minusButton = DomAcquisition("#down")
+var buttons = [start, reset, plusButton, minusButton]
+
+
+//自分もやってみる
+
+function getSets(sets) {
+    sets = str_hpd/(str_active+str_rest)
+} 
+
+
+
+
+
+//以下でタイマーを実装している
+var startTime;
+var remainingTime = parseInt(active.innerText)*60*1000;
+var elapsedTime = 0;
+var timeLeft;
+var timeId;
+var run = false
+
+//let premerTime = 100000 * 60
+
+//関数
+function forlogs(elments) {
+    elments.forEach(elment => console.log(elment));
+}
+
+function classChange(element, className, num) {
+    switch (num) {
+        case 1:
+            element.classList.add(className);
+            break;
+        case 2:
+            element.classList.remove(className);;
+            break;
+        case 3:
+            element.classList.toggle(className);;
+            break;
+    }
+}
+function addEvent(eventTarget, eventName, callBack) {
+    eventTarget.addEventListener(eventName, callBack)
+}
+function InsertText(el, content) {
+    el.textContent = content
+}
+function updateTimer(t) {
+    let d = new Date(t)
+    let h = d.getHours()
+    let m = d.getMinutes()
+    let s = d.getSeconds()
+    //let ms = d.getMilliseconds()
+    h = h.toString().padStart(2, "0")
+    m = m.toString().padStart(2, "0")
+    s = s.toString().padStart(2, "0")
+    //ms = ms.toString().padStart(3, "0")
+    timer.textContent = `${h-9}:${m}:${s}`
+    //.${ms}
+}
+function timeCountDown() {
+    timerId = setInterval(function () {
+        elapsedTime = new Date() - startTime
+        timeLeft = remainingTime - elapsedTime
+        updateTimer(timeLeft)
+        if (timeLeft <= 0) {
+            clearInterval(timerId)
+            remainingTime = 0
+            timeLeft = 0
+            run = false
+            InsertText(start, "Start")
+            return updateTimer(timeLeft)
+        }
+    }, 10);
+    
+}
 function timeSet(sign) {
     switch (sign) {
         case "+":
@@ -235,33 +466,7 @@ function timeSet(sign) {
     updateTimer(remainingTime)
 }
 
-let day=0;
-let sumsyou = 0;
-
-//配列をくっつけるための関数
-function pushTwoDimensionalArray(array1, array2){
-    var array3 = [];
-      //　縦方向の追加
-    array3 = array1.slice();
-    for(var i = 0; i < array2.length; i++){
-        array3.push(array2[i]);
-    }
-}
-
-//ランダムにするための関数
-function arrayShuffle(array) {
-    for(var i = (array.length - 1); 0 < i; i--){
-
-    // 0〜(i+1)の範囲で値を取得
-    var r = Math.floor(Math.random() * (i + 1));
-
-    // 要素の並び替えを実行
-    var tmp = array[i];
-    array[i] = array[r];
-    array[r] = tmp;
-}
-    return array;
-}
+var day=0;
 function keisan(){
     day=new Date()
     hpdall=parseInt(hpd.innerText)
@@ -293,44 +498,15 @@ function keisan(){
     amari1=moto1%activeall
     amari2=moto2%activeall
     amari3=moto3%activeall
+    sumama=amari1+amari2+amari3
 
-    kei.textContent = `${amari1}+${amari2}+${amari3}`
-    
-    sumsyou = Math.round(syou1+syou2+syou3)
 
-//idの配列生成
-var arid = new Array(sumsyou);
-for (let i=0; i<syou1; i++) {
-    arid[i] = 1;
+    ///kei.textContent = `${sumama}`
+    task2 = task2.innerText
+
+    kei.textContent = `${task2}:${5}`
+   
 }
-for (let i=syou1; i<syou2; i++) {
-    arid[i] = 2;
-}
-for (let i=syou2; i<syou3; i++) {
-    arid[i] = 3;
-}
-
-//task名の配列生成
-var arname = new Array(sumsyou);
-for (let i=0; i<syou1; i++) {
-    arname[i] = task1;
-}
-for (let i=syou1; i<syou2; i++) {
-    arname[i] = task2;
-}
-for (let i=syou2; i<syou3; i++) {
-    arname[i] = task3;
-}
-//配列を行で結合
-pushTwoDimensionalArray(arid, arname);
-console.log(arrayShuffle(arname));
-
-}
-
-
-
-
-
 function startClickEvent() {
     if (remainingTime <= 0) { return }
     if (run === false) {
@@ -396,7 +572,7 @@ function buttonsEvents(eventName) {
 }
 
 // 処理呼び出し
-const eventNames = ["mouseover", "click"]
+var eventNames = ["mouseover", "click"]
 eventNames.forEach(eventName => { buttonsEvents(eventName) })
     </script>
 </body>

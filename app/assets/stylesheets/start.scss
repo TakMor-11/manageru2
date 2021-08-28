@@ -1,31 +1,158 @@
-body{
-    background-color: #928d8d;
+.btn--orange,
+.btn--orange {
+    color: #fff;
+    background-color: #7691dd;
+    line-height:20px;
 }
+.btn--orange:hover,
+.btn--orange:hover {
+    color: #fff;
+    background: #7691dd;
+    line-height:20px;
+}
+.btn--radius {
+    border-radius: 100vh;
+    line-height:20px;
+}
+
+.bbtn--orange,
+.bbtn--orange {
+    color: #fff;
+    background-color: #7691dd;
+    line-height:20px;
+}
+.bbtn--orange:hover,
+.bbtn--orange:hover {
+    color: #fff;
+    background: #7691dd;
+    line-height:20px;
+}
+.bbtn--radius {
+    border-radius: 100vh;
+    line-height:20px;
+}
+
+div.logmy{
+    transform: translateY(+50%);
+    -webkit-transform: translateY(+50%);
+    -ms-transform: translateY(+50%);
+}
+
+
+
+
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(150deg, 
+            #7df7fda0, 
+            #3bb4ec60 30%, 
+            #80f1f760 50%, 
+            #00f3ffA0), 
+        image-url("yamasora.jpg");
+    background-repeat: no-repeat;
+    background-position: 60%;
+    animation: move 50s infinite both;
+    right:1px;
+    
+}
+@keyframes move{
+    0% {
+        background-size:100% auto;
+    }
+    50% {
+        background-size:140% auto;
+    }
+    100% {
+        background-size:100% auto;
+    }
+}
+
+
+
+
+
 
 main{
     height: 500px;
-    width: 800px;
+    width: 50%;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 0px;
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
+        Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+}
+.block{
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background-color: rgb(245, 109, 109);
+    margin: 10px auto;
+
+    position: absolute;
+    top: 80px;
+    left: 30%;
 }
 
-.block{
-    width: 500px;
-    height: 500px;
-    border-radius: 300px;
-    background-color: rgb(184, 179, 179);
-    margin: auto;
-    position: relative;
-    
-}
+
 .blackBox{
+    width: 450px;
+    height: 450px;
     position: absolute;
     font-size: 50px;
     text-align: center;
-    top: 100px;
-    bottom: 100px;
-    left: 100px;
-    right: 100px;
+    top: 80px;
+    left: 0%;   
+}
+
+h1 {
+    color: #505050;/*文字色*/
+    padding: 0.5em;/*文字周りの余白*/
+    display: inline-block;/*おまじない*/
+    line-height: 2.0;/*行高*/
+    background: #dbebf8;/*背景色*/
+    vertical-align: middle;
+    border-radius: 25px 0px 0px 25px;/*左側の角を丸く*/
+ }
+
+h1:before {
+    content: '●';
+    color: white;
+    margin-right: 3px;
+}
+
+
+body h1{
+    height: 50px;
+    width: 250px;
+    margin: auto;
+
+    margin-top: 10px;
+    position: absolute;
+    top: 20px;
+    right:20px;
+}
+
+div.manages_container{
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(+50%);
+    -webkit-transform: translateY(+50%);
+    -ms-transform: translateY(+50%);
+}
+
+
+body.manages_container{
+    height: 50px;
+    width: 300px;
+
+    margin-top: 10px;
+    position: absolute;
+    top: 80px;
+    right:20px;
 }
 
 .timer{
@@ -45,7 +172,7 @@ button{
 }
 
 .start{
-    color: #66FF00;
+    color: #f9faf8;
     background-color: black;
     font-size: 30px;
     padding: 0 20px;
@@ -53,7 +180,7 @@ button{
 }
 
 .reset{
-    color: #66FF00;
+    color: #f9faf8;
     background-color: black;
     font-size: 30px;
     padding: 0 10px;
@@ -80,7 +207,7 @@ button{
 
 .active{
     background-color:#222222;
-    color: brown;
+    color: rgb(250, 39, 39);
 }
 
 .aquaColor{
@@ -89,4 +216,53 @@ button{
 
 .aquaBoder{
     border: 10px solid aqua;
+}
+
+
+/*hello_index.html*/
+.entrance{
+    width: 490px;
+    color: #f9faf8;
+    background-color: rgb(75, 198, 214);
+    font-size: 100px;
+    padding: 0 10px;
+}
+.hello{
+    height: 100px;
+    width: 400px;
+    font-size: 40px;
+    margin-top: 10px;
+    position: absolute;
+    top: 200px;
+    left:35%;
+}
+
+.contents{
+    height: 100px;
+    width: 400px;
+    font-size: 20px;
+    margin-top: 10px;
+    position: absolute;
+    top: 150px;
+    left:15%;
+}
+
+.contents_index{
+    height: 100px;
+    width: 580px;
+    font-size: 19px;
+    margin-top: 10px;
+    position: absolute;
+    top: 150px;
+    left:15%;
+}
+
+h3{
+    height: 100px;
+    width: 400px;
+    font-size: 35px;
+    margin-top: 10px;
+    position: absolute;
+    top: 100px;
+    left:12%;
 }
