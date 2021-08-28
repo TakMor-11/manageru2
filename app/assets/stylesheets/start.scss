@@ -48,10 +48,10 @@ body {
     height: 100%;
     background-image: 
         linear-gradient(150deg, 
-            #7df7fda0, 
-            #3bb4ec60 30%, 
-            #80f1f760 50%, 
-            #00f3ffA0), 
+        #7df7fda0, 
+        #3bb4ec60 30%, 
+        #80f1f760 50%, 
+        #00f3ffA0), 
         image-url("yamasora.jpg");
     background-repeat: no-repeat;
     background-position: 60%;
@@ -115,7 +115,7 @@ h1 {
     background: #dbebf8;/*背景色*/
     vertical-align: middle;
     border-radius: 25px 0px 0px 25px;/*左側の角を丸く*/
- }
+}
 
 h1:before {
     content: '●';
