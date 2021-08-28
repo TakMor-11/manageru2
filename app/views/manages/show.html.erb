@@ -1,5 +1,6 @@
 <h1>Manageru</h1>
 <h3>Task詳細</h3>
+<div class=contents>
 <div class="manage">
     <%= @manage.id %>
     <p>タスク名「<%= @manage.task %>」</p>
@@ -12,3 +13,4 @@
 <%= link_to "編集する", edit_manage_path(@manage.id) %>
 <%= link_to "Task一覧に戻る", manages_path %>
 <%= link_to "学習タイマーへ戻る", manages_start_path %>
+</div>

@@ -1,7 +1,10 @@
 <h1>Manageru</h1>
 <h3>Task一覧</h3>
+
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
 <%= link_to "新規taskページへ", manages_new_path %>
+<br>
+<div class=contents_index>
 <div class="manages-container">
     <% @manages.each do |t| %>
         <div class="manage">
@@ -18,8 +21,9 @@
         </div>
     <% end %>
 </div>
-
+<br>
 <% if user_signed_in? %>
     <%= link_to "マイページへ", user_path(current_user.id) %>　
 <% end %>
 
+</div>
